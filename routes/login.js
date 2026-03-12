@@ -9,7 +9,7 @@ export const login = async (req, reply) => {
   try {
     // Hämta användaren med angivet användarnamn från databasen
     const users = await excuteQuery(
-      "SELECT * FROM admin WHERE username = ?",
+      "SELECT * FROM users WHERE username = ?",
       [username]
     );
 
