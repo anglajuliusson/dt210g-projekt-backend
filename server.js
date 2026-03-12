@@ -2,7 +2,7 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors' // Importera cors
 import './config/db.js'
-import { routes as reviews } from './routes/reviews.js'; // Importera route-funktionerna från reviews.js
+import { routes as reviews } from './routes/reviewsRoutes.js'; // Importera route-funktionerna från reviews.js
 
 const fastify = Fastify({ logger: true }); 
 
