@@ -75,7 +75,7 @@ export const updateUser = async(req, reply) => {
         }  
 
         // SQL-fråga för att uppdatera recension
-        let usersData = await excuteQuery(`update users set username=?, password=? where id=?`,[id]
+        let usersData = await excuteQuery(`update users set username=?, password=? where id=${id}`,
             [ 
                 username,
                 hashedPassword

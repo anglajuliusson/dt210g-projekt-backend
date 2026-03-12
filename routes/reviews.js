@@ -90,7 +90,7 @@ export const updateReview = async(req, reply) => {
         }   
 
         // SQL-fråga för att uppdatera recension
-        let reviewsData = await excuteQuery(`update reviews set book_id=?, book_title=?, rating=?, review_text=? where id=?`,[id]
+        let reviewsData = await excuteQuery(`update reviews set book_id=?, book_title=?, rating=?, review_text=? where id=${id}`,
             [ 
                 book_id, 
                 book_title, 
