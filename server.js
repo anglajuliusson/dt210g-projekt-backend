@@ -4,6 +4,7 @@ import cors from '@fastify/cors' // Importera cors
 import './config/db.js'
 import { routes as reviews } from './routes/reviewsRoutes.js'; // Importera route-funktionerna från reviewsRoutes.js
 import { routes as users } from './routes/userRoutes.js'; // Importera route-funktionerna från userRoutes.js
+import { loginRoutes } from './routes/loginRoutes.js'; // Importera route-funktionerna från loginRoutes.js
 
 const fastify = Fastify({ logger: true }); 
 
@@ -15,6 +16,7 @@ await fastify.register(cors, {
 // Registrera routes så att alla definierade endpoints blir tillgängliga
 fastify.register(reviews);
 fastify.register(users);
+fastify.register(loginRoutes);
 
 // Run the server!
 try {
