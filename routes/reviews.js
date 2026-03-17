@@ -23,9 +23,30 @@ export const getReviewById = async(req, reply) => {
     }
 };
 
+//Funktion som hämtar recension utifrån book_id
+export const getReviewsByBookId = async (req, reply) => {
+    const { bookId } = req.params;
+
+    try {
+        const reviewsData = await excuteQuery(
+            `SELECT reviews.*, users.username 
+             FROM reviews 
+             JOIN users ON reviews.user_id = users.id 
+             WHERE book_id = ? 
+             ORDER BY created_at DESC`,
+            [bookId]
+        );
+
+        reply.status(200).send(reviewsData);
+    } catch (err) {
+        reply.status(500).send({ error: "Kunde inte hämta recensioner." });
+    }
+};
+
 // Funktion som lägger till ny recension
 export const addReview = async(req, reply) => {
     try {
+        const user_id = req.user.id; // Användarens id
         const { book_id, book_title, rating, review_text } = req.body;
 
         // Kontrollera att book_id inte är en tom sträng
@@ -49,8 +70,9 @@ export const addReview = async(req, reply) => {
         }         
 
         // SQL-fråga för att lägga till recension
-        let reviewsData = await excuteQuery("insert into reviews(book_id, book_title, rating, review_text) values(?, ?, ?, ?)",
+        let reviewsData = await excuteQuery("insert into reviews(user_id, book_id, book_title, rating, review_text) values(?, ?, ?, ?, ?)",
             [
+                user_id,
                 book_id, 
                 book_title, 
                 rating, 
