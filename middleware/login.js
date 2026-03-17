@@ -1,4 +1,4 @@
-import { jwt } from "jsonwebtoken";
+import  jwt  from "jsonwebtoken";
 
 // Middleware som verifierar JWT-token för skyddade endpoints
 export const verifyToken = async (req, reply) => {
